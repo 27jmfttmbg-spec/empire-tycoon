@@ -24,6 +24,22 @@
 .manager-actions .return{background:#e8c783;color:#132d39;border:0}
 #sheet.property-focus .actions{position:sticky;bottom:-17px;background:#0c2230;padding:11px 0 3px;z-index:2}
 @media(max-height:750px){#sheet.property-focus{max-height:55vh}}
+
+#sheet.property-focus{max-height:none!important;overflow:visible;padding:11px 12px 10px;border-radius:17px;bottom:calc(env(safe-area-inset-bottom,0px) + 76px);max-width:460px}
+#sheet.property-focus .close{right:8px;top:4px;font-size:21px;z-index:5}
+#sheet.property-focus h2{font-size:15px;margin:2px 26px 5px 0;letter-spacing:.1px}
+#sheet.property-focus .eyebrow{font-size:8px;letter-spacing:1.2px}
+.mini-manager{display:flex;align-items:center;gap:8px;font-size:10px;line-height:1.3;color:#d9e5e6;white-space:nowrap;overflow:hidden}
+.mini-manager span:first-child{color:var(--gold);font-weight:800;flex-shrink:0}
+.mini-manager span:last-child{overflow:hidden;text-overflow:ellipsis}
+.compact-stats{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:8px 0;font-size:9px;color:#c7d5d9;font-weight:800}
+.compact-stats b{color:#8ff4bd;font-size:13px}
+.compact-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.compact-actions .action{padding:9px 4px;min-width:0;font-size:11px;line-height:1.2}
+.compact-actions small{display:block;font-size:9px;margin-top:4px;font-weight:750}
+.compact-bottom{display:flex;justify-content:space-between;gap:8px;margin-top:7px}
+.compact-bottom button{border:0;background:none;color:#eacb8e;font-size:9px;font-weight:850;padding:5px 2px}
+@media(max-height:700px){#sheet.property-focus{padding:8px 10px}#sheet.property-focus h2{font-size:13px}.compact-stats{margin:5px 0}.compact-actions .action{padding:7px 3px}}
 </style></head><body><div id="view"></div><div id="labels" aria-label="Select a property"></div><div id="ui"><div id="header"><div id="bank" class="glass"><div class="eyebrow">EMPIRE CAPITAL</div><div id="cash">$850,000</div><div id="rate">+$0 / MIN</div></div><div id="wordmark" class="glass"><b>EMPIRE<span style="color:var(--gold)">.</span></b><small>THE WATERFRONT · PHASE 03B · REVIEW BUILD</small></div></div><div id="progress" class="glass"><span id="tier">LEVEL 1 · DEVELOPER</span><div id="track"><div id="trackfill"></div></div><span id="lots">0 / 9</span></div><div id="tip">EXPANDED CITY · PINCH TO ZOOM · DRAG TO EXPLORE</div><div id="toast" role="status" aria-live="polite"></div><div id="sheet" class="glass"></div><div id="zoomControls"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="zoomFit" class="fit" aria-label="Fit whole city">FIT</button></div><div id="footerNote">PHASE 03B · REVIEW BUILD · AUTOSAVED</div><div id="dock"><button id="portfolio"><span>▦</span>PORTFOLIO</button><button id="objectives"><span>◇</span>OBJECTIVES</button><button id="city"><span>⌂</span>CITY</button></div></div><div id="loading"><strong>EMPIRE.</strong><p id="loadingText">Preparing your waterfront empire</p><div id="loadtrack"><div id="loadfill"></div></div><p>Real 3D architecture · Optimized for iPhone</p></div><div id="fatal"></div>
 <script>window.__empireBooted=false;setTimeout(function(){if(!window.__empireBooted){var l=document.getElementById('loading');if(l){l.innerHTML='<strong style="font-size:25px">CONNECTION NEEDED</strong><p>The 3D engine could not start. Check your internet connection and reload Safari.</p><button style="background:#f1ca7e;color:#102734;border:0;border-radius:12px;padding:13px 24px;font-weight:800" onclick="location.reload()">RETRY GAME</button>'}}},12000);</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script><script type="module">
@@ -54,14 +70,14 @@ function sanitizeSave(raw){
   state.last=Number.isFinite(raw.last)?Math.min(Date.now(),Math.max(0,raw.last)):Date.now();
   if(raw.claimed&&typeof raw.claimed==='object')for(const m of missions)state.claimed[m.id]=raw.claimed[m.id]===true;
  }
- for(const p of properties){const n=raw?.props?.[p.id]?.level;state.props[p.id]={level:Number.isInteger(n)?Math.max(0,Math.min(10,n)):0}}
+ for(const p of properties){const n=raw?.props?.[p.id]?.level;state.props[p.id]={level:Number.isInteger(n)?Math.max(0,Math.min(10,n)):0,hired:raw?.props?.[p.id]?.hired===true}}
  return state;
 }
 let rawSave;try{rawSave=JSON.parse(localStorage.getItem(KEY))}catch(e){console.warn('Save unreadable; starting clean',e)}
 let save=sanitizeSave(rawSave);
 
 const ownedCount=()=>properties.filter(p=>save.props[p.id].level>0).length;
-const rent=p=>p.rent*(1+Math.max(0,save.props[p.id].level-1)*.55);
+const rent=p=>p.rent*(1+Math.max(0,save.props[p.id].level-1)*.55)*(save.props[p.id].hired?1.1:1);
 const perMin=()=>properties.reduce((a,p)=>a+(save.props[p.id].level>0?rent(p):0),0);
 const upgradePrice=p=>Math.round(p.cost*(.32+save.props[p.id].level*.22));
 let storageFailed=false;
@@ -102,51 +118,51 @@ function restoreCity(){
   focusRestore=null;
  }
 }
+function investedValue(p,level){
+ let sum=p.cost;
+ for(let l=1;l<level;l++)sum+=Math.round(p.cost*(.32+l*.22));
+ return sum;
+}
 function renderAdvisor(p){
- const s=save.props[p.id],owned=s.level>0,atMax=s.level>=10;
- const price=owned?(atMax?0:upgradePrice(p)):p.cost;
- const current=owned?rent(p):0;
- const projected=owned?(atMax?current:p.rent*(1+s.level*.55)):p.rent;
- const gain=Math.max(0,projected-current);
- const afford=save.cash>=price;
- const shortfall=Math.max(0,price-save.cash);const payback=gain>0?price/gain:Infinity;
- const manager=advisorNames[p.asset]||'Alex Morgan';
+ const state=save.props[p.id],owned=state.level>0,maxed=state.level>=10;
+ const hirePrice=Math.round(p.cost*.08);
+ const sellPrice=owned?Math.round(investedValue(p,state.level)*.7):0;
+ const upgrade=owned&&!maxed?upgradePrice(p):p.cost;
  const next=properties[(properties.findIndex(q=>q.id===p.id)+1)%properties.length];
- const sectorPitch={
-  hotel:'Guest-suite renovations and premium hospitality amenities',
-  steakhouse:'Private dining improvements and an expanded guest experience',
-  exchange:'Retail tenant enhancements and flagship leasing upgrades',
-  coffee:'A redesigned café floor and higher-capacity service',
-  mansion:'Luxury interiors and exclusive waterfront amenities'
- }[p.asset];
- const greeting=!owned
-  ?`I've completed the acquisition review for ${p.name}. ${sectorPitch} give this asset long-term potential. The current modeled gross rent is ${money(p.rent)} per minute. Shall I proceed with the purchase?`
-  :atMax
-   ?`${p.name} has reached its maximum development tier. Your modeled gross rental income is ${money(current)} per minute. I recommend reviewing another opportunity in the portfolio.`
-   :`${p.name} currently generates ${money(current)} per minute in modeled gross rent. My proposal is ${sectorPitch.toLowerCase()}, bringing the asset to Level ${s.level+1}. The expected increase is ${money(gain)} per minute. Would you like to approve the investment?`;
- sheet(`<div class="eyebrow">PRIVATE CLIENT · PROPERTY ADVISORY</div>
- <h2>${p.name}</h2><p>${p.kind} · ${p.desc}</p>
- <div class="manager"><div class="manager-avatar" aria-hidden="true">♛</div><div><div class="name">${manager}</div><div class="role">SENIOR ASSET MANAGER · EMPIRE PRIVATE</div></div></div>
- <div class="manager-quote">“${greeting}”</div>
- <div class="kv">
-  <div>CURRENT GROSS RENT<strong style="color:var(--mint)">${money(current)}/min</strong></div>
-  <div>PROJECTED GROSS RENT<strong>${money(projected)}/min</strong></div>
-  <div>ASSET STATUS<strong>${owned?'LEVEL '+s.level+' / 10':'AVAILABLE'}</strong></div>
-  <div>GROSS RENT INCREASE<strong style="color:var(--mint)">+${money(gain)}/min</strong></div>
- </div>
- <div class="proposal"><div class="proposal-head"><span>${!owned?'ACQUISITION PROPOSAL':atMax?'FULLY DEVELOPED':'CAPITAL IMPROVEMENT'}</span><span>${owned?'LEVEL '+s.level+' / 10':'NEW ASSET'}</span></div>
- <div class="proposal-value">${atMax?'MAXIMUM TIER':money(price)}</div>
- <div class="proposal-sub">${atMax?'This property has reached its maximum upgrade level.':afford?`Available capital: ${money(save.cash)} · ${gain?`Incremental gross income: +${money(gain)}/min · ${payback<Infinity?`Gross payback ~${Math.ceil(payback)} min`:'No income increase'}`:''}`:`Additional capital required: ${money(shortfall)}. You can return once your rental income covers the difference.`}</div>
- <div class="proposal-progress"><i style="width:${Math.max(0,Math.min(100,s.level*10))}%"></i></div></div>
- <div class="actions"><button class="action gold" id="invest" ${atMax||!afford?'disabled':''}>${!owned?'ACQUIRE PROPERTY · '+money(price):atMax?'FULLY UPGRADED':'AUTHORIZE UPGRADE · '+money(price)}</button></div>
- <div class="manager-actions"><button id="nextAsset">NEXT PROPERTY →</button><button id="backToCity" class="return">↗ RETURN TO CITY</button></div>`, 'property');
+ const manager=advisorNames[p.asset]||'Alex Morgan';
+ const advice=!owned?'Available for purchase.':!state.hired?'Hire a manager for +10% rent.':maxed?'Fully upgraded.':'Upgrade to increase rent.';
+ const hireAllowed=owned&&!state.hired;
+ const canUpgrade=!maxed&&save.cash>=upgrade;
+ const canHire=hireAllowed&&save.cash>=hirePrice;
+ sheet(`<div class="compact-top"><div class="eyebrow">${p.kind}</div><h2>${p.name}</h2>
+ <div class="mini-manager"><span>♛ ${manager}</span><span>${advice}</span></div>
+ <div class="compact-stats"><span>${owned?'LV '+state.level+'/10':'FOR SALE'}</span><b>${money(owned?rent(p):p.rent)}/min</b><span>${state.hired?'MANAGED':'NO MANAGER'}</span></div></div>
+ <div class="compact-actions">
+ <button class="action gold" id="invest" ${canUpgrade?'':'disabled'}>${!owned?'BUY':'UPGRADE'}<small>${maxed?'MAX':money(upgrade)}</small></button>
+ <button class="action secondary" id="hire" ${canHire?'':'disabled'}>HIRE<small>${state.hired?'HIRED':!owned?'OWN FIRST':money(hirePrice)}</small></button>
+ <button class="action secondary" id="sell" ${owned?'':'disabled'}>SELL<small>${owned?money(sellPrice):'NOT OWNED'}</small></button></div>
+ <div class="compact-bottom"><button id="nextAsset">NEXT PROPERTY →</button><button id="backToCity">BACK TO CITY ✕</button></div>`, 'property');
  $('invest').onclick=()=>{
-  const state=save.props[p.id],isOwned=state.level>0,actual=isOwned?upgradePrice(p):p.cost;
-  if(state.level>=10||!Number.isFinite(actual)||actual<=0||save.cash<actual)return;
-  save.cash-=actual;state.level=isOwned?state.level+1:1;
+  const st=save.props[p.id],isOwned=st.level>0,price=isOwned?upgradePrice(p):p.cost;
+  if(st.level>=10||!Number.isFinite(price)||price<=0||save.cash<price)return;
+  save.cash-=price;st.level=isOwned?st.level+1:1;
   persist();refresh();updateBuildingState(p);
-  toast(isOwned?`${p.name} · Level ${state.level} upgrade complete`:`${p.name} · Acquisition completed`);
-  renderAdvisor(p);
+  toast(isOwned?'Upgrade complete':'Property purchased');renderAdvisor(p);
+ };
+ $('hire').onclick=()=>{
+  const st=save.props[p.id];
+  if(st.level===0||st.hired||save.cash<hirePrice)return;
+  save.cash-=hirePrice;st.hired=true;
+  persist();refresh();toast('Manager hired · +10% gross rent');renderAdvisor(p);
+ };
+ $('sell').onclick=()=>{
+  const st=save.props[p.id];if(st.level===0)return;
+  const payout=Math.round(investedValue(p,st.level)*.7);
+  if(!confirm(`Sell ${p.name} for ${money(payout)}? This resets its upgrades and manager.`))return;
+  if(st.level===0)return;
+  save.cash+=payout;st.level=0;st.hired=false;
+  persist();refresh();updateBuildingState(p);
+  toast('Property sold');renderAdvisor(p);
  };
  $('nextAsset').onclick=()=>showProperty(next);
  $('backToCity').onclick=closeSheet;
