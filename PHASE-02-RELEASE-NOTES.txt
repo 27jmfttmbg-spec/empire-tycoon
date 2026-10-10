@@ -1,0 +1,25 @@
+EMPIRE TYCOON — PHASE 02 CORRECTED MASTERPLAN
+
+The previous Phase 02 package incorrectly put the central Exchange property
+directly in the north/south motor road. This build removes that road.
+
+FIXES:
+- Removed centerline motor road entirely. Vehicles use two perimeter north/south roads.
+- Central Exchange sits in a car-free formal plaza.
+- Pedestrian promenades terminate before the flagship's parcel, not under it.
+- Removed cross-axis paving that ran underneath the Exchange.
+- Kept all 9 property parcels clear of all 4 vehicle roads.
+- Exact left/right mirrored parcel centers, sizes, and property models.
+- Added startup spatial validation: reject overlapping parcels, road intersections,
+  or missing mirror counterparts.
+- Preserved Phase 1 gameplay, save key, five original 3D assets, and iPhone HUD.
+
+VERIFIED:
+- Static parcel/road collision test: 9 parcels, 4 roads, 0 intersections.
+- JavaScript syntax check: PASS.
+- All five original GLB assets present with valid glTF magic header.
+- Full mobile Safari appearance still requires a real-device check.
+
+INSTALL:
+Unzip. Upload index.html to repository root, and models/*.glb to models/.
+Commit and refresh GitHub Pages on iPhone.

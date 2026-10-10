@@ -1,0 +1,33 @@
+EMPIRE TYCOON — PHASE 01 / CORE FOUNDATION
+
+INSTALL (iPhone Safari / GitHub Pages)
+1. Open the ZIP in the Files app and extract it.
+2. In your GitHub repo, replace root index.html with this index.html.
+3. Make sure all five .glb files are in the models/ folder (preserve names).
+4. Commit and refresh your GitHub Pages URL. If Safari shows the old build, reload the tab.
+
+UPDATES
+- Preserves your existing Deluxe save key and property progress.
+- Sanitizes corrupt/invalid save data and caps property levels at 10.
+- Credits elapsed rent once per interval / visibility change; 4-hour offline cap.
+- Fixed projected revenue metric: hourly, not mislabeled annual.
+- Fallback 3D buildings are selectable even when GLB files fail to load.
+- Faster asset timeouts; gameplay not blocked by missing models.
+- Engine CDN failure screen with Retry; WebGL initialization error message.
+- Reduced mobile pixel ratio and shadow resolution; throttled marker updates.
+- Accessibility: live notifications and named property selection markers.
+- Retains permanent daylight, fixed camera, 9 properties, objectives, and 5 GLB assets.
+
+REQUIREMENTS
+- Internet is required to load Three.js from jsDelivr CDN.
+- GitHub Pages or a web server is required; opening index.html directly from Files may block model loads.
+- Full iPhone Safari rendering has not been verified in this environment.
+
+ACCEPTANCE CHECKLIST
+[ ] All nine property pins show up on iPhone Safari
+[ ] Tap a pin, buy a property, and upgrade it
+[ ] Portfolio income updates as rent accrues
+[ ] Refresh and verify cash/ownership persist
+[ ] Background Safari for 30 seconds and return: offline rent credited once
+[ ] Open Objectives, complete and claim the first mission once
+[ ] Fixed camera and permanent daylight retained

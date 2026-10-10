@@ -1,0 +1,21 @@
+EMPIRE TYCOON — PHASE 02B | FIXED DIAGONAL CAMERA
+
+- Replaced near-overhead view with a locked diagonal architectural camera.
+- Responsive orthographic fitting considers real building heights, parcel footprint,
+  and the safe viewport between top HUD and bottom navigation.
+- Replaced huge property cards with compact gold + and green check markers.
+- Tap a marker for property details, prices, and upgrades.
+- Preserved nine properties, original GLBs, gameplay, objectives, and existing saves.
+- Retained the corrected car-free central plaza and perimeter vehicle roads.
+- No orbit, drag, zoom, view toggle, or night mode.
+
+TESTS
+- Node JavaScript syntax: PASS.
+- Five GLB assets: valid and included.
+- Road/property rectangle intersection test: zero.
+- Camera viewport fit: mathematically checked at iPhone dimensions.
+- Live Safari screenshot: NOT VERIFIED. Chromium GPU failed in this container.
+
+INSTALL
+Unzip, upload index.html to repository root and five models/*.glb into models/.
+Refresh the GitHub Pages site. Phase 2 is pending visual approval on iPhone.

@@ -1,7 +1,7 @@
 EMPIRE — THE WATERFRONT | iPhone-friendly 3D tycoon
 
 UPLOAD TO YOUR EXISTING GITHUB REPOSITORY
-1. Unzip Empire-Tycoon-Deluxe.zip in the iPhone Files app.
+1. Unzip Empire-Tycoon-Phase-02.zip in the iPhone Files app.
 2. Open github.com/27jmfttmbg-spec/empire-tycoon in Safari.
 3. Replace the repository root index.html with the index.html in this folder.
 4. Upload all FIVE files in the models folder to the repository's models/ directory, using these exact names:
