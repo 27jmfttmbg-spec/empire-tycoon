@@ -1,13 +1,30 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#0c1b25"><title>EMPIRE — The Waterfront</title><style>
 :root{--bg:#0a1c28;--panel:#102734ed;--edge:#ffffff2c;--gold:#f1ca7e;--mint:#7ff2bb;--white:#f6f4ed;--muted:#b7cbd0}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#87c5d9;color:var(--white);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-tap-highlight-color:transparent}#view{position:fixed;inset:0}#view canvas{display:block;width:100%;height:100%;touch-action:none}button{font:inherit;cursor:pointer}button:disabled{opacity:.4;cursor:default}#ui{position:fixed;inset:0;pointer-events:none}#ui button,#ui .touch{pointer-events:auto}.glass{background:var(--panel);border:1px solid var(--edge);box-shadow:0 14px 42px #04131a45;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}#header{position:absolute;top:calc(env(safe-area-inset-top,0px) + 11px);left:12px;right:12px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px}#bank{padding:11px 13px;border-radius:16px;min-width:152px}#wordmark{padding:11px 13px;border-radius:16px;text-align:right} .eyebrow{font-size:9px;letter-spacing:1.8px;color:var(--gold);font-weight:900}#cash{font-size:24px;font-weight:900;letter-spacing:-.9px;line-height:1.3;font-variant-numeric:tabular-nums}#rate{font-size:11px;color:var(--mint);font-weight:850}#wordmark b{font-size:17px;letter-spacing:2.5px}#wordmark small{display:block;font-size:10px;color:#b9d2da;margin-top:4px}#progress{position:absolute;top:calc(env(safe-area-inset-top,0px) + 92px);left:12px;right:12px;display:flex;align-items:center;gap:10px;max-width:440px;padding:10px 12px;border-radius:13px}#progress span{font-size:10px;white-space:nowrap;font-weight:800}#track{height:6px;border-radius:8px;background:#ffffff2c;flex:1;overflow:hidden}#trackfill{height:100%;width:0;background:linear-gradient(90deg,#f0c374,#f8e6b0);transition:width .3s}#tip{position:absolute;top:calc(env(safe-area-inset-top,0px) + 148px);left:50%;transform:translateX(-50%);background:#0d2c39d9;border:1px solid #ffffff30;border-radius:100px;padding:8px 13px;white-space:nowrap;font-size:10px;font-weight:800;max-width:94vw;overflow:hidden;text-overflow:ellipsis}#dock{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 10px);left:10px;right:10px;display:flex;gap:8px;align-items:stretch;justify-content:center}#dock button{background:#102b3beF;color:#ecf5f4;border:1px solid #ffffff32;border-radius:15px;min-height:57px;flex:1;max-width:185px;font-size:11px;font-weight:900;letter-spacing:.4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}#dock button span{font-size:20px;color:var(--gold)}#dock button.active{background:linear-gradient(140deg,#eac377,#cda35b);color:#1b2c34;border-color:#f6e1b1}#dock button.active span{color:#1b2c34}#sheet{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 79px);left:10px;right:10px;margin:auto;max-width:470px;max-height:min(63vh,520px);overflow:auto;padding:17px;border-radius:21px;display:none;pointer-events:auto}#sheet h2{font-size:22px;letter-spacing:-.7px;margin:6px 30px 6px 0}#sheet p{color:var(--muted);font-size:12px;line-height:1.6;margin:5px 0 14px}#sheet .close{position:absolute;right:13px;top:9px;background:transparent;border:0;color:#fff;font-size:27px;padding:3px 8px} .kv{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.kv>div{background:#ffffff0e;border:1px solid #ffffff17;border-radius:11px;padding:10px;font-size:10px;color:#b9cbd0}.kv strong{display:block;color:#fff;font-size:15px;margin-top:5px}.actions{display:flex;gap:8px;margin-top:12px}.action{border:0;border-radius:12px;padding:13px 11px;flex:1;font-size:12px;font-weight:900}.gold{background:linear-gradient(135deg,#f9df9d,#dbad5d);color:#1b2d36}.secondary{background:#2d4a5b;color:#f0f5f6}.listrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 4px;border-bottom:1px solid #ffffff1d;cursor:pointer}.listrow:last-child{border:0}.listrow b{font-size:12px}.listrow small{display:block;color:#b6ccd3;font-size:10px;margin-top:4px}.listrow em{font-style:normal;color:var(--gold);font-size:11px;font-weight:900;white-space:nowrap}.mission{padding:12px;border:1px solid #ffffff26;background:#ffffff0a;border-radius:13px;margin:8px 0}.mission.done{border-color:#77ecad77}.mission strong{font-size:12px}.mission small{display:block;color:#bcd2d7;font-size:11px;margin:6px 0}.mission button{border:0;background:var(--gold);border-radius:9px;color:#132a34;padding:9px 13px;font-weight:900;font-size:11px}.mission button:disabled{background:#385866;color:#bed4d8}.tag{display:inline-block;border-radius:7px;padding:4px 7px;background:#f1cb7e1c;color:var(--gold);font-size:10px;font-weight:900}#toast{position:absolute;top:calc(env(safe-area-inset-top,0px) + 190px);left:50%;transform:translateX(-50%);background:#0a2838f2;border:1px solid #ffffff44;border-radius:13px;padding:11px 14px;font-size:12px;display:none;text-align:center;max-width:90vw;box-shadow:0 8px 30px #0005}#loading{position:fixed;inset:0;z-index:10;background:radial-gradient(circle at 50% 30%,#19435b,#081822 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:25px;text-align:center}#loading strong{font-size:38px;letter-spacing:7px;color:#f0ce8e}#loading p{font-size:12px;color:#b6ced7;margin:0}#loadtrack{width:min(270px,78vw);height:5px;background:#ffffff26;border-radius:10px;overflow:hidden}#loadfill{width:0;height:100%;background:var(--gold);transition:width .3s}#fatal{position:fixed;z-index:20;inset:20% 12%;background:#182c39;color:white;border-radius:20px;padding:20px;display:none;overflow:auto}#labels{position:fixed;inset:0;pointer-events:none} .pin{position:absolute;transform:translate(-50%,-50%);border:1px solid #eacb8e9e;background:#0a2539e8;color:white;border-radius:11px;padding:6px 9px;min-width:74px;max-width:112px;box-shadow:0 5px 14px #061d2677;text-align:center;pointer-events:auto;touch-action:manipulation}.pin b{display:block;font-size:9px;line-height:1.2;letter-spacing:.25px}.pin small{display:block;color:var(--gold);font-size:9px;margin-top:3px;font-weight:900}.pin.owned{border-color:#7cf0b599}.pin.owned small{color:#8bf5bb}#zoomControls{position:absolute;right:12px;bottom:calc(env(safe-area-inset-bottom,0px) + 153px);display:flex;flex-direction:column;gap:8px;pointer-events:auto}#zoomControls button{width:46px;height:46px;border-radius:14px;background:#102b3bef;border:1px solid #ffffff55;color:#f8e1aa;font-size:27px;font-weight:800;box-shadow:0 6px 18px #0004;touch-action:manipulation}#zoomControls button.fit{font-size:12px;letter-spacing:.5px}#footerNote{position:absolute;bottom:calc(env(safe-area-inset-bottom,0px) + 80px);right:11px;font-size:9px;color:#fff;text-shadow:0 1px 5px #0009;opacity:.8}@media(min-width:700px){#sheet{left:20px;right:auto;bottom:90px;width:410px}#dock{left:auto;right:20px;width:400px}#progress{max-width:340px}}
-/* Phase 02B: small markers, legible HUD, uninterrupted architecture. */
+/* Phase 03B: expanded skyline, same compact property markers, legible HUD, uninterrupted architecture. */
 .pin{display:flex;align-items:center;justify-content:center;min-width:0;max-width:none;width:29px;height:29px;padding:0;border:1.5px solid #f6d898;border-radius:50%;font-size:19px;line-height:1;font-weight:800;color:#152d3b;background:#f2ce83ed;box-shadow:0 3px 13px #07192380,0 0 0 3px #132c3844;transform:translate(-50%,-50%);z-index:3}
 .pin.owned{background:#8cf0bded;border-color:#dbfff0;color:#0b3d33}
 .pin:focus-visible{outline:3px solid #fff;outline-offset:3px}
 #labels{z-index:2}#ui{z-index:3}
 #tip{font-size:9px;letter-spacing:.2px;padding:7px 10px}
 @media(max-width:430px){#bank{min-width:0;padding:10px 11px}#cash{font-size:22px}#wordmark{padding:10px 11px}#wordmark b{font-size:15px}#wordmark small{font-size:9px}#progress{top:calc(env(safe-area-inset-top,0px) + 84px)}#tip{top:calc(env(safe-area-inset-top,0px) + 135px)}}
-</style></head><body><div id="view"></div><div id="labels" aria-label="Select a property"></div><div id="ui"><div id="header"><div id="bank" class="glass"><div class="eyebrow">EMPIRE CAPITAL</div><div id="cash">$850,000</div><div id="rate">+$0 / MIN</div></div><div id="wordmark" class="glass"><b>EMPIRE<span style="color:var(--gold)">.</span></b><small>THE WATERFRONT · PHASE 02E</small></div></div><div id="progress" class="glass"><span id="tier">LEVEL 1 · DEVELOPER</span><div id="track"><div id="trackfill"></div></div><span id="lots">0 / 9</span></div><div id="tip">PINCH TO ZOOM · DRAG TO EXPLORE</div><div id="toast" role="status" aria-live="polite"></div><div id="sheet" class="glass"></div><div id="zoomControls"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="zoomFit" class="fit" aria-label="Fit whole city">FIT</button></div><div id="footerNote">PHASE 02E · AUTOSAVED</div><div id="dock"><button id="portfolio"><span>▦</span>PORTFOLIO</button><button id="objectives"><span>◇</span>OBJECTIVES</button><button id="city"><span>⌂</span>CITY</button></div></div><div id="loading"><strong>EMPIRE.</strong><p id="loadingText">Preparing your waterfront empire</p><div id="loadtrack"><div id="loadfill"></div></div><p>Real 3D architecture · Optimized for iPhone</p></div><div id="fatal"></div>
+
+#sheet.property-focus{overflow-y:auto;overscroll-behavior:contain;max-height:min(63vh,560px);background:linear-gradient(155deg,#163746f5,#0b1d2af8);border:1px solid #f0d18a66;box-shadow:0 18px 65px #061018bb}
+.manager{display:flex;align-items:center;gap:11px;background:linear-gradient(110deg,#ffffff13,#e6c77c0b);border:1px solid #eacb8050;padding:11px;border-radius:15px;margin:8px 0 13px}
+.manager-avatar{width:43px;height:43px;flex-shrink:0;border-radius:13px;background:linear-gradient(145deg,#f3d698,#b48a4a);display:grid;place-items:center;color:#173040;font-size:23px}
+.manager .name{font-size:12px;font-weight:900}.manager .role{font-size:9px;color:#e7c88b;letter-spacing:1.1px;margin-top:3px}
+.manager-quote{font-size:12px;line-height:1.55;color:#e9f1f0;margin:10px 0}
+.proposal{background:#07192399;border:1px solid #ffffff22;border-radius:13px;padding:12px;margin-top:10px}
+.proposal-head{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:10px;letter-spacing:1px;color:#e5cb94;font-weight:900}
+.proposal-value{font-size:22px;font-weight:900;margin-top:6px}
+.proposal-sub{font-size:11px;color:#bcd2d6;margin-top:5px;line-height:1.5}
+.proposal-progress{height:5px;background:#ffffff22;border-radius:20px;overflow:hidden;margin-top:9px}
+.proposal-progress>i{display:block;height:100%;background:linear-gradient(90deg,#d8ae66,#89edbd)}
+.manager-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.manager-actions button{background:#234556;border:1px solid #ffffff30;color:#f2f5f0;border-radius:10px;padding:10px 12px;font-size:10px;font-weight:850}
+.manager-actions .return{background:#e8c783;color:#132d39;border:0}
+#sheet.property-focus .actions{position:sticky;bottom:-17px;background:#0c2230;padding:11px 0 3px;z-index:2}
+@media(max-height:750px){#sheet.property-focus{max-height:55vh}}
+</style></head><body><div id="view"></div><div id="labels" aria-label="Select a property"></div><div id="ui"><div id="header"><div id="bank" class="glass"><div class="eyebrow">EMPIRE CAPITAL</div><div id="cash">$850,000</div><div id="rate">+$0 / MIN</div></div><div id="wordmark" class="glass"><b>EMPIRE<span style="color:var(--gold)">.</span></b><small>THE WATERFRONT · PHASE 03B · REVIEW BUILD</small></div></div><div id="progress" class="glass"><span id="tier">LEVEL 1 · DEVELOPER</span><div id="track"><div id="trackfill"></div></div><span id="lots">0 / 9</span></div><div id="tip">EXPANDED CITY · PINCH TO ZOOM · DRAG TO EXPLORE</div><div id="toast" role="status" aria-live="polite"></div><div id="sheet" class="glass"></div><div id="zoomControls"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="zoomFit" class="fit" aria-label="Fit whole city">FIT</button></div><div id="footerNote">PHASE 03B · REVIEW BUILD · AUTOSAVED</div><div id="dock"><button id="portfolio"><span>▦</span>PORTFOLIO</button><button id="objectives"><span>◇</span>OBJECTIVES</button><button id="city"><span>⌂</span>CITY</button></div></div><div id="loading"><strong>EMPIRE.</strong><p id="loadingText">Preparing your waterfront empire</p><div id="loadtrack"><div id="loadfill"></div></div><p>Real 3D architecture · Optimized for iPhone</p></div><div id="fatal"></div>
 <script>window.__empireBooted=false;setTimeout(function(){if(!window.__empireBooted){var l=document.getElementById('loading');if(l){l.innerHTML='<strong style="font-size:25px">CONNECTION NEEDED</strong><p>The 3D engine could not start. Check your internet connection and reload Safari.</p><button style="background:#f1ca7e;color:#102734;border:0;border-radius:12px;padding:13px 24px;font-weight:800" onclick="location.reload()">RETRY GAME</button>'}}},12000);</script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"}}</script><script type="module">
 import * as THREE from 'three';
@@ -51,16 +68,97 @@ let storageFailed=false;
 const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(save));storageFailed=false}catch(e){if(!storageFailed){storageFailed=true;console.warn('Save unavailable',e);toast('Safari storage is unavailable; progress may not persist.')}}};
 let selected=null,currentTab='',toastTimeout;function toast(s){$('toast').textContent=s;$('toast').style.display='block';clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>$('toast').style.display='none',3200)};
 function refresh(){const n=ownedCount();$('cash').textContent=money(save.cash);$('rate').textContent='+'+money(perMin())+' / MIN';$('lots').textContent=n+' / 9';$('tier').textContent=n>=9?'LEVEL 5 · TYCOON':n>=7?'LEVEL 4 · MOGUL':n>=5?'LEVEL 3 · MAGNATE':n>=2?'LEVEL 2 · INVESTOR':'LEVEL 1 · DEVELOPER';$('trackfill').style.width=(n/9*100)+'%';updateLabels();}
-function sheet(html,tab){$('sheet').innerHTML='<button class="close" aria-label="Close panel">×</button>'+html;$('sheet').style.display='block';currentTab=tab;document.querySelector('#sheet .close').onclick=closeSheet;for(const id of ['portfolio','objectives','city'])$(id).classList.toggle('active',id===tab)}
-function closeSheet(){$('sheet').style.display='none';selected=null;currentTab='';for(const id of ['portfolio','objectives','city'])$(id).classList.remove('active')}
-function showProperty(p){selected=p;const s=save.props[p.id],owned=s.level>0,upgrade=s.level>=10?0:upgradePrice(p),cost=owned?upgrade:p.cost;sheet(`<div class="eyebrow">${p.kind}</div><h2>${p.name}</h2><p>${p.desc}</p><div class="kv"><div>${owned?'CURRENT INCOME':'PROJECTED INCOME'}<strong style="color:var(--mint)">+${money(owned?rent(p):p.rent)}/min</strong></div><div>${owned?'ASSET LEVEL':'ACQUISITION PRICE'}<strong>${owned?s.level+' / 10':money(p.cost)}</strong></div><div>PORTFOLIO STATUS<strong>${owned?'OWNED':'FOR SALE'}</strong></div><div>${owned?'NEXT IMPROVEMENT':'HOURLY GROSS RENT'}<strong>${owned?(s.level===10?'MAX LEVEL':money(upgrade)):money(p.rent*60)}</strong></div></div><div class="actions"><button class="action gold" id="invest" ${s.level>=10||save.cash<cost?'disabled':''}>${owned?(s.level>=10?'FULLY UPGRADED':'UPGRADE · '+money(upgrade)):'ACQUIRE · '+money(p.cost)}</button><button class="action secondary" id="dismiss">CLOSE</button></div>`, 'property');$('invest').onclick=()=>{if(!Number.isFinite(cost)||cost<=0||save.cash<cost||s.level>=10)return;if(!owned){save.cash-=p.cost;s.level=1;toast('Acquired '+p.name+' · New income unlocked')}else{save.cash-=upgrade;s.level++;toast(p.name+' upgraded to level '+s.level)}persist();refresh();showProperty(p);updateBuildingState(p)};$('dismiss').onclick=closeSheet}
-function showPortfolio(){selected=null;const net=properties.reduce((s,p)=>s+(save.props[p.id].level?p.cost+Array.from({length:save.props[p.id].level-1},(_,i)=>Math.round(p.cost*(.32+(i+1)*.22))).reduce((a,b)=>a+b,0):0),0);sheet(`<div class="eyebrow">YOUR HOLDINGS</div><h2>Property Portfolio</h2><p>${ownedCount()} landmark properties · ${money(perMin())} gross income per minute · ${money(net)} invested capital</p><div id="portfolioRows"></div>`, 'portfolio');for(const p of properties){const row=document.createElement('div');row.className='listrow';const s=save.props[p.id];row.innerHTML=`<div><b>${p.name}</b><small>${s.level?'OWNED · LEVEL '+s.level+' · +'+money(rent(p))+'/min':p.kind+' · AVAILABLE'}</small></div><em>${s.level?'VIEW →':compact(p.cost)+' →'}</em>`;row.onclick=()=>showProperty(p);$('portfolioRows').append(row)}}
-function showObjectives(){selected=null;sheet(`<div class="eyebrow">BUILD YOUR LEGACY</div><h2>Empire Objectives</h2><p>Complete development milestones to unlock capital bonuses. Rewards can be claimed once.</p><div id="missionRows"></div>`, 'objectives');for(const m of missions){const complete=m.goal(),claimed=!!save.claimed[m.id],row=document.createElement('div');row.className='mission'+(complete?' done':'');row.innerHTML=`<strong>${complete?'✦ ':''}${m.name}</strong><small>${m.desc} · Reward ${money(m.reward)}</small><button ${!complete||claimed?'disabled':''}>${claimed?'CLAIMED':complete?'CLAIM '+money(m.reward):'IN PROGRESS'}</button>`;row.querySelector('button').onclick=()=>{if(!m.goal()||save.claimed[m.id])return;save.claimed[m.id]=true;save.cash+=m.reward;persist();refresh();toast('Objective completed · +'+money(m.reward));showObjectives()};$('missionRows').append(row)}}
+function sheet(html,tab){$('sheet').innerHTML='<button class="close" aria-label="Close panel">×</button>'+html;$('sheet').style.display='block';currentTab=tab;$('sheet').classList.toggle('property-focus',tab==='property');document.querySelector('#sheet .close').onclick=closeSheet;for(const id of ['portfolio','objectives','city'])$(id).classList.toggle('active',id===tab)}
+function closeSheet(){restoreCity();$('sheet').style.display='none';selected=null;currentTab='';for(const id of ['portfolio','objectives','city'])$(id).classList.remove('active')}
+
+let focusRestore=null,focusTween=null,focusedProperty=null;
+const advisorNames={hotel:'Alex Morgan',steakhouse:'Jordan Ellis',exchange:'Taylor Brooks',coffee:'Morgan Reed',mansion:'Cameron Blake'};
+const propertyFocusProfiles={
+ 'hotel-w':{height:46,zoom:2.3,offset:105},'hotel-e':{height:46,zoom:2.3,offset:105},
+ 'monroe-w':{height:14,zoom:2.65,offset:110},'monroe-e':{height:14,zoom:2.65,offset:110},
+ 'exchange':{height:22,zoom:2.4,offset:112},
+ 'noir-w':{height:12,zoom:2.9,offset:115},'noir-e':{height:12,zoom:2.9,offset:115},
+ 'ocean-w':{height:17,zoom:2.7,offset:110},'ocean-e':{height:17,zoom:2.7,offset:110}
+};
+function focusProperty(p){
+ if(focusedProperty!==p.id){
+  if(!focusRestore)focusRestore={zoom:cityZoom,x:panX,y:panY};
+  focusedProperty=p.id;
+ }
+ camera.updateMatrixWorld();
+ const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0);
+ const up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);
+ const profile=propertyFocusProfiles[p.id];
+ const local=new THREE.Vector3(p.x,profile.height,p.z).sub(cameraTarget);
+ // Property appears above the manager's panel, at the original diagonal viewing angle.
+ const targetZoom=Math.max(cityZoom,profile.zoom);
+ const goal={zoom:Math.min(3.6,targetZoom),x:local.dot(right),y:local.dot(up)+profile.offset};
+ focusTween={from:{zoom:cityZoom,x:panX,y:panY},to:goal,start:performance.now(),duration:800};
+}
+function restoreCity(){
+ focusedProperty=null;
+ if(focusRestore){
+  focusTween={from:{zoom:cityZoom,x:panX,y:panY},to:focusRestore,start:performance.now(),duration:700};
+  focusRestore=null;
+ }
+}
+function renderAdvisor(p){
+ const s=save.props[p.id],owned=s.level>0,atMax=s.level>=10;
+ const price=owned?(atMax?0:upgradePrice(p)):p.cost;
+ const current=owned?rent(p):0;
+ const projected=owned?(atMax?current:p.rent*(1+s.level*.55)):p.rent;
+ const gain=Math.max(0,projected-current);
+ const afford=save.cash>=price;
+ const shortfall=Math.max(0,price-save.cash);const payback=gain>0?price/gain:Infinity;
+ const manager=advisorNames[p.asset]||'Alex Morgan';
+ const next=properties[(properties.findIndex(q=>q.id===p.id)+1)%properties.length];
+ const sectorPitch={
+  hotel:'Guest-suite renovations and premium hospitality amenities',
+  steakhouse:'Private dining improvements and an expanded guest experience',
+  exchange:'Retail tenant enhancements and flagship leasing upgrades',
+  coffee:'A redesigned café floor and higher-capacity service',
+  mansion:'Luxury interiors and exclusive waterfront amenities'
+ }[p.asset];
+ const greeting=!owned
+  ?`I've completed the acquisition review for ${p.name}. ${sectorPitch} give this asset long-term potential. The current modeled gross rent is ${money(p.rent)} per minute. Shall I proceed with the purchase?`
+  :atMax
+   ?`${p.name} has reached its maximum development tier. Your modeled gross rental income is ${money(current)} per minute. I recommend reviewing another opportunity in the portfolio.`
+   :`${p.name} currently generates ${money(current)} per minute in modeled gross rent. My proposal is ${sectorPitch.toLowerCase()}, bringing the asset to Level ${s.level+1}. The expected increase is ${money(gain)} per minute. Would you like to approve the investment?`;
+ sheet(`<div class="eyebrow">PRIVATE CLIENT · PROPERTY ADVISORY</div>
+ <h2>${p.name}</h2><p>${p.kind} · ${p.desc}</p>
+ <div class="manager"><div class="manager-avatar" aria-hidden="true">♛</div><div><div class="name">${manager}</div><div class="role">SENIOR ASSET MANAGER · EMPIRE PRIVATE</div></div></div>
+ <div class="manager-quote">“${greeting}”</div>
+ <div class="kv">
+  <div>CURRENT GROSS RENT<strong style="color:var(--mint)">${money(current)}/min</strong></div>
+  <div>PROJECTED GROSS RENT<strong>${money(projected)}/min</strong></div>
+  <div>ASSET STATUS<strong>${owned?'LEVEL '+s.level+' / 10':'AVAILABLE'}</strong></div>
+  <div>GROSS RENT INCREASE<strong style="color:var(--mint)">+${money(gain)}/min</strong></div>
+ </div>
+ <div class="proposal"><div class="proposal-head"><span>${!owned?'ACQUISITION PROPOSAL':atMax?'FULLY DEVELOPED':'CAPITAL IMPROVEMENT'}</span><span>${owned?'LEVEL '+s.level+' / 10':'NEW ASSET'}</span></div>
+ <div class="proposal-value">${atMax?'MAXIMUM TIER':money(price)}</div>
+ <div class="proposal-sub">${atMax?'This property has reached its maximum upgrade level.':afford?`Available capital: ${money(save.cash)} · ${gain?`Incremental gross income: +${money(gain)}/min · ${payback<Infinity?`Gross payback ~${Math.ceil(payback)} min`:'No income increase'}`:''}`:`Additional capital required: ${money(shortfall)}. You can return once your rental income covers the difference.`}</div>
+ <div class="proposal-progress"><i style="width:${Math.max(0,Math.min(100,s.level*10))}%"></i></div></div>
+ <div class="actions"><button class="action gold" id="invest" ${atMax||!afford?'disabled':''}>${!owned?'ACQUIRE PROPERTY · '+money(price):atMax?'FULLY UPGRADED':'AUTHORIZE UPGRADE · '+money(price)}</button></div>
+ <div class="manager-actions"><button id="nextAsset">NEXT PROPERTY →</button><button id="backToCity" class="return">↗ RETURN TO CITY</button></div>`, 'property');
+ $('invest').onclick=()=>{
+  const state=save.props[p.id],isOwned=state.level>0,actual=isOwned?upgradePrice(p):p.cost;
+  if(state.level>=10||!Number.isFinite(actual)||actual<=0||save.cash<actual)return;
+  save.cash-=actual;state.level=isOwned?state.level+1:1;
+  persist();refresh();updateBuildingState(p);
+  toast(isOwned?`${p.name} · Level ${state.level} upgrade complete`:`${p.name} · Acquisition completed`);
+  renderAdvisor(p);
+ };
+ $('nextAsset').onclick=()=>showProperty(next);
+ $('backToCity').onclick=closeSheet;
+}
+function showProperty(p){selected=p;focusProperty(p);renderAdvisor(p)}
+function showPortfolio(){restoreCity();selected=null;const net=properties.reduce((s,p)=>s+(save.props[p.id].level?p.cost+Array.from({length:save.props[p.id].level-1},(_,i)=>Math.round(p.cost*(.32+(i+1)*.22))).reduce((a,b)=>a+b,0):0),0);sheet(`<div class="eyebrow">YOUR HOLDINGS</div><h2>Property Portfolio</h2><p>${ownedCount()} landmark properties · ${money(perMin())} gross income per minute · ${money(net)} invested capital</p><div id="portfolioRows"></div>`, 'portfolio');for(const p of properties){const row=document.createElement('div');row.className='listrow';const s=save.props[p.id];row.innerHTML=`<div><b>${p.name}</b><small>${s.level?'OWNED · LEVEL '+s.level+' · +'+money(rent(p))+'/min':p.kind+' · AVAILABLE'}</small></div><em>${s.level?'VIEW →':compact(p.cost)+' →'}</em>`;row.onclick=()=>showProperty(p);$('portfolioRows').append(row)}}
+function showObjectives(){restoreCity();selected=null;sheet(`<div class="eyebrow">BUILD YOUR LEGACY</div><h2>Empire Objectives</h2><p>Complete development milestones to unlock capital bonuses. Rewards can be claimed once.</p><div id="missionRows"></div>`, 'objectives');for(const m of missions){const complete=m.goal(),claimed=!!save.claimed[m.id],row=document.createElement('div');row.className='mission'+(complete?' done':'');row.innerHTML=`<strong>${complete?'✦ ':''}${m.name}</strong><small>${m.desc} · Reward ${money(m.reward)}</small><button ${!complete||claimed?'disabled':''}>${claimed?'CLAIMED':complete?'CLAIM '+money(m.reward):'IN PROGRESS'}</button>`;row.querySelector('button').onclick=()=>{if(!m.goal()||save.claimed[m.id])return;save.claimed[m.id]=true;save.cash+=m.reward;persist();refresh();toast('Objective completed · +'+money(m.reward));showObjectives()};$('missionRows').append(row)}}
 $('portfolio').onclick=()=>currentTab==='portfolio'?closeSheet():showPortfolio();$('objectives').onclick=()=>currentTab==='objectives'?closeSheet():showObjectives();$('city').onclick=()=>{closeSheet();toast('Welcome to the waterfront · Tap any property marker')};
 const scene=new THREE.Scene();scene.background=new THREE.Color('#77b8d0');scene.fog=new THREE.FogExp2('#77b8d0',.00015);const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.45));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.02;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;$('view').append(renderer.domElement);
 // Fixed diagonal 3/4 architectural camera. Fit real city envelopes into HUD-safe viewport.
 const camera=new THREE.OrthographicCamera(-350,350,350,-350,1,2200);
-const cameraTarget=new THREE.Vector3(0,16,20);let cityZoom=1.48,panX=0,panY=0;
+const cameraTarget=new THREE.Vector3(0,16,20);let cityZoom=1.10,panX=0,panY=0;
 camera.position.set(580,680,850);camera.lookAt(cameraTarget);
 function resize(){
  const w=innerWidth,h=innerHeight;
@@ -68,7 +166,7 @@ function resize(){
  const right=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,0);
  const up=new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld,1);
  const corners=[];
- for(const x of [-285,285])for(const y of [0,110])for(const z of [-197,308]){
+ for(const x of [-960,960])for(const y of [0,170])for(const z of [-310,340]){
   const v=new THREE.Vector3(x,y,z).sub(cameraTarget);corners.push({x:v.dot(right),y:v.dot(up)});
  }
  const minX=Math.min(...corners.map(v=>v.x)),maxX=Math.max(...corners.map(v=>v.x));
@@ -78,7 +176,7 @@ function resize(){
  const usableH=Math.max(180,h-safeTop-safeBottom),usableW=Math.max(200,w-24);
  const unitsPerPx=Math.max((maxX-minX)/usableW,(maxY-minY)/usableH)*.88/cityZoom; // Deliberate closer architectural framing
  const halfW=unitsPerPx*w/2,halfH=unitsPerPx*h/2;
- const imageCenterY=(safeTop+(h-safeBottom))/2 + Math.min(72,h*.048);
+ const imageCenterY=(safeTop+(h-safeBottom))/2 + Math.min(25,h*.022);
  const centerY=(minY+maxY)/2-(imageCenterY-h/2)*unitsPerPx+panY;
  const centerX=(minX+maxX)/2+panX;
  camera.left=centerX-halfW;camera.right=centerX+halfW;
@@ -87,12 +185,12 @@ function resize(){
  renderer.setSize(w,h);renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.55));
 }
 resize();addEventListener('resize',resize);
-function setZoom(value){cityZoom=Math.max(.8,Math.min(4.5,value));resize()}
+function setZoom(value){focusTween=null;cityZoom=Math.max(.8,Math.min(4.5,value));resize()}
 $('zoomIn').onclick=()=>setZoom(cityZoom*1.3);
 $('zoomOut').onclick=()=>setZoom(cityZoom/1.3);
-$('zoomFit').onclick=()=>{panX=0;panY=0;setZoom(1)};
-const canvas=renderer.domElement;const touches=new Map();let gestureMoved=false,lastPinchDistance=0,lastCenter=null;
-canvas.addEventListener('pointerdown',e=>{touches.set(e.pointerId,{x:e.clientX,y:e.clientY});gestureMoved=false;try{canvas.setPointerCapture(e.pointerId)}catch(_){}});
+$('zoomFit').onclick=()=>{focusRestore=null;focusedProperty=null;focusTween=null;panX=0;panY=0;setZoom(1.10)};
+const canvas=renderer.domElement;const touches=new Map();let gestureMoved=false,lastPinchDistance=0,lastCenter=null,gestureTravel=0;
+canvas.addEventListener('pointerdown',e=>{touches.set(e.pointerId,{x:e.clientX,y:e.clientY});gestureMoved=false;gestureTravel=0;try{canvas.setPointerCapture(e.pointerId)}catch(_){}});
 canvas.addEventListener('pointermove',e=>{
  if(!touches.has(e.pointerId))return;
  const old=touches.get(e.pointerId);touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
@@ -105,10 +203,10 @@ canvas.addEventListener('pointermove',e=>{
   lastPinchDistance=d;lastCenter=center;gestureMoved=true;
  }else if(arr.length===1){
   const dx=e.clientX-old.x,dy=e.clientY-old.y;
-  if(Math.abs(dx)+Math.abs(dy)>0){const scale=(camera.right-camera.left)/innerWidth;panX-=dx*scale;panY+=dy*scale;resize();if(Math.abs(dx)+Math.abs(dy)>2)gestureMoved=true}
+  if(Math.abs(dx)+Math.abs(dy)>0){const scale=(camera.right-camera.left)/innerWidth;panX-=dx*scale;panY+=dy*scale;resize();gestureTravel+=Math.abs(dx)+Math.abs(dy);if(gestureTravel>9)gestureMoved=true}
  }
 });
-function endGesture(e){touches.delete(e.pointerId);lastPinchDistance=0;lastCenter=null;if(touches.size===0)setTimeout(()=>{gestureMoved=false},100)}
+function endGesture(e){touches.delete(e.pointerId);lastPinchDistance=0;lastCenter=null;if(touches.size===0)setTimeout(()=>{gestureMoved=false},250)}
 canvas.addEventListener('pointerup',endGesture);canvas.addEventListener('pointercancel',endGesture);
 canvas.addEventListener('wheel',e=>{e.preventDefault();setZoom(cityZoom*(e.deltaY<0?1.12:1/1.12))},{passive:false});
 scene.add(new THREE.HemisphereLight(0xf2faff,0x506f65,1.35));const sun=new THREE.DirectionalLight(0xffedce,2.65);sun.position.set(-190,300,150);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);sun.shadow.camera.left=-370;sun.shadow.camera.right=370;sun.shadow.camera.top=370;sun.shadow.camera.bottom=-370;sun.shadow.normalBias=.05;scene.add(sun);
@@ -120,6 +218,76 @@ const world=new THREE.Group();scene.add(world);function box(parent,w,h,d,m,x,y,z
 box(world,650,1.5,488,mats.grass,0,-1.2,0);
 box(world,790,.35,185,mats.water,0,-1.6,330);
 for(const sign of [-1,1])box(world,125,.3,610,mats.water,sign*385,-1.5,20);
+// PHASE 03B · REVIEW BUILD: two fully mirrored waterfront expansion districts.
+// The original nine purchasable landmarks and their saves are untouched.
+const districtRoad=material('#394d58'),districtPark=material('#4d896c');
+const districtWalk=material('#c9c2ad'),districtRoof=material('#263d4b');
+const towerGlass=[material('#315d71',.28,.3),material('#426c7a',.32,.23),material('#234d62',.25,.34),material('#577d85',.34,.19)];
+const towerFrame=material('#d5d3c5',.72,.08),towerGold=material('#b5a47e',.42,.24);
+function skylineTower(x,z,w,d,h,variant){
+ const g=new THREE.Group();g.position.set(x,0,z);world.add(g);
+ box(g,w+8,.45,d+8,districtWalk,0,-.16,0);
+ box(g,w,h,d,towerGlass[variant%4],0,h/2,0);
+ for(const side of [-1,1]){
+  box(g,1.7,h+1,d+1,towerFrame,side*(w/2-.6),h/2,0);
+  box(g,w+1,h+1,1.7,towerFrame,0,h/2,side*(d/2-.6));
+ }
+ for(let level=12;level<h;level+=12)box(g,w+1,.85,d+1,towerFrame,0,level,0);
+ box(g,w+5,2,d+5,districtRoof,0,h+1,0);
+ if(variant%3===0){box(g,w*.55,7,d*.55,towerGlass[(variant+1)%4],0,h+5,0);box(g,w*.57,.9,d*.57,towerGold,0,h+9,0)}
+}
+function expansionDistrict(side){
+ const cx=side*650;
+ box(world,535,1.5,565,districtPark,cx,-1.15,-2);
+ box(world,550,.35,23,mats.sand,cx,-.36,287);
+ box(world,550,.24,15,districtWalk,cx,-.19,274);
+ box(world,540,.17,17,districtRoad,cx,-.12,-263);
+ box(world,540,.17,17,districtRoad,cx,-.12,254);
+ for(const dx of [-245,0,245]){
+  box(world,15,.17,515,districtRoad,cx+dx,-.12,-3);
+  for(let z=-239;z<240;z+=24)box(world,.2,.025,8,mats.line,cx+dx,.01,z);
+ }
+ for(const z of [-129,125]){
+  box(world,508,.16,14,districtRoad,cx,-.11,z);
+  for(let dx=-225;dx<225;dx+=25)box(world,9,.025,.18,mats.line,cx+dx,.01,z);
+ }
+ // Eight glass towers per district, paired in exact x-axis symmetry.
+ const towerSites=[[-166,-191],[-56,-191],[56,-191],[166,-191],[-166,44],[-56,44],[56,44],[166,44]];
+ towerSites.forEach(([dx,z],i)=>{
+  const h=[90,145,115,165,125,105,155,100][i];
+  skylineTower(cx+side*dx,z,44,43,h,i);
+ });
+ // Low-rise luxury neighborhood along the water.
+ for(const dx of [-180,-90,0,90,180]){
+  const x=cx+side*dx;
+  box(world,68,.4,74,districtWalk,x,-.1,193);
+  box(world,49,18,42,towerFrame,x,9,193);
+  box(world,52,2,45,districtRoof,x,19,193);
+  box(world,41,10,2,towerGlass[1],x,10,214);
+  box(world,15,.13,25,mats.stone,x,.05,237);
+ }
+ // Waterfront parks, tree-lined promenades and paired marina piers.
+ for(const dx of [-216,-108,0,108,216]){
+  const x=cx+side*dx;
+  for(const z of [-248,-143,109,261]){
+   cyl(world,1.15,1.7,8,mats.trunk,x,4,z,7);
+   const crown=new THREE.Mesh(new THREE.IcosahedronGeometry(6,1),mats.palm);
+   crown.position.set(x,11,z);world.add(crown);
+  }
+ }
+ for(const dx of [-155,0,155]){
+  const x=cx+side*dx;
+  box(world,4,.22,57,mats.wood,x,-.18,313);
+  box(world,11,.28,4,mats.wood,x,-.15,340);
+ }
+ // Elevated pedestrian connector visually links each new district to the original island.
+ const bridgeCenter=side*438;
+ box(world,180,.4,14,districtWalk,bridgeCenter,.12,15);
+ for(const edge of [-1,1])box(world,180,1.2,.8,towerFrame,bridgeCenter,1.1,15+edge*6.5);
+}
+expansionDistrict(-1);expansionDistrict(1);
+// Additional ocean panels behind the new coastline.
+for(const side of [-1,1])box(world,650,.3,180,mats.water,side*655,-1.55,377);
 // A consistent stone promenade and pale sand beach span the entire frontage.
 box(world,664,.25,18,mats.sand,0,-.36,247);
 box(world,665,.22,15,mats.stone,0,-.22,229);
@@ -266,6 +434,7 @@ addEventListener('pagehide',()=>creditElapsed(Date.now()));
 addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')creditElapsed(Date.now(),true);else creditElapsed(Date.now())});
 const clock=new THREE.Clock();let lastLabelUpdate=0;
 function frame(){requestAnimationFrame(frame);if(document.visibilityState==='hidden')return;
+ if(focusTween){const f=focusTween;const u=Math.min(1,(performance.now()-f.start)/f.duration);const eased=u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2;cityZoom=f.from.zoom+(f.to.zoom-f.from.zoom)*eased;panX=f.from.x+(f.to.x-f.from.x)*eased;panY=f.from.y+(f.to.y-f.from.y)*eased;resize();if(u>=1)focusTween=null}
  const t=clock.getElapsedTime();for(const v of traffic)v.g.position.z=((v.phase+t*v.speed+225)%450)-225;
  if(t-lastLabelUpdate>.15){updateLabels();lastLabelUpdate=t}renderer.render(scene,camera)}frame();
 </script></body></html>
